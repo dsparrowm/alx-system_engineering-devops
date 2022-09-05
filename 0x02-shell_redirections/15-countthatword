@@ -1,0 +1,2 @@
+#!/bin/bash
+egrep -o bin /etc/passwd | wc -l
