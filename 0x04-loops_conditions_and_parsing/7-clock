@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#displays the clock in 12hours
+hour=0
+min=1
+echo "Hour: $hour"
+while((hour < 12));
+do
+	echo "$min"
+	if((min==59));
+	then
+		((hour++))
+		echo "Hour: $hour"
+		min=1
+	fi
+	((min++))
+done
