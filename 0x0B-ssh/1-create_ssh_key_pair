@@ -1,16 +1,4 @@
 #!/usr/bin/env bash
+#creates an ssh keygen
 
-# set the private key name
-private_key="school"
-
-# set the number of bits for the key
-bits=4096
-
-# set the passphrase
-passphrase="Betty"
-
-# generate the RSA private key
-openssl genrsa -aes256 -passout pass:"$passphrase" -out "$private_key".key "$bits"
-
-# generate the RSA public key from the private key
-openssl rsa -in "$private_key".key -passin pass:"$passphrase" -pubout -out "$private_key".pub
+ssh-keygen -t rsa -b 4096 -P betty -f school
