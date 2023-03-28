@@ -1,2 +1,4 @@
 #!/usr/bin/env bash
-sudo service apache2 start
+#debug apache server
+echo "ServerName localhost" >> /etc/apache2.conf
+service apache2 start
