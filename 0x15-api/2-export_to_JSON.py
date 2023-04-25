@@ -20,7 +20,7 @@ if __name__ == "__main__":
     filename = "{}.json".format(user_id)
     tasks = []
     for todo in todo_data:
-        task ={}
+        task = {}
         task['task'] = todo.get('title')
         task['completed'] = todo.get('completed')
         task['username'] = data.get('username')
