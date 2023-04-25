@@ -21,4 +21,6 @@ if __name__ == "__main__":
     with open(filename, 'w') as csvfile:
         writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
         for task in todo_data:
-            writer.writerow([user_id, data.get('username'), task.get('completed'), task.get('title')])
+            writer.writerow(
+                    [user_id, data.get('username'),
+                     task.get('completed'), task.get('title')])
