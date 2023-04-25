@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """This module works on Api calls"""
+
 import json
 import sys
 import urllib.request
