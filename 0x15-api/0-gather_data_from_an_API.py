@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""This module works on Api calls"""
+"""This module works on Api calls
+   Exports data in json format
+"""
 
 import json
 import sys
