@@ -1,30 +1,35 @@
 #!/usr/bin/python3
-"""This module works on Api calls
-   Exports data in json format
+"""export data in the JSON format.
+   The module sends a request to an API
 """
-
 import json
+import requests
 import sys
-import urllib.request
+
+
+URL = "https://jsonplaceholder.typicode.com"
+"""Link to API"""
 
 
 if __name__ == "__main__":
-    user_id = sys.argv[1]
-    api = "https://jsonplaceholder.typicode.com/users"
-    base_url = api + "/" + user_id
-    response = urllib.request.urlopen(base_url)
-    data = json.loads(response.read().decode())
-    employee_name = data.get('name')
-    todo_url = base_url + "/todos"
-    todo_res = urllib.request.urlopen(todo_url)
-    todo_data = json.loads(todo_res.read().decode())
-    done_tasks = []
-    done = 0
-    for task in todo_data:
-        if task.get('completed'):
-            done_tasks.append(task)
-            done += 1
-    print("Employee {} is done with tasks {}/{}:"
-          .format(employee_name, done, len(todo_data)))
-    for tasks in done_tasks:
-        print("\t {}".format(tasks.get('title')))
+    users = requests.get("{}/users/".format(URL))
+    todos = requests.get("{}/todos/".format(URL))
+    if (users.status_code == requests.codes.ok and
+            todos.status_code == requests.codes.ok):
+        file_name = "todo_all_employees.json"
+        all_user_todo = {}
+        for user in users.json():
+            userid = user.get('id')
+            username = user.get('username')
+            user_todos = []
+            for todo in todos.json():
+                if userid == todo.get('userId'):
+                    task = {}
+                    task['username'] = username
+                    task['task'] = todo.get('title')
+                    task['completed'] = todo.get('completed')
+                    user_todos.append(task)
+                    all_user_todo[userid] = user_todos
+
+        with open(file_name, 'w') as fs:
+            json.dump(all_user_todo, fs)
